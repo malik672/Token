@@ -54,6 +54,7 @@ contract Token is ERC20 {
 
     //mint tokens to user
     function mint(address _account, uint256 _amount) external onlyOwner {
+        _totalSupply += _amount;
         _mint(_account, _amount);
     }
 
