@@ -17,6 +17,7 @@ contract Token is ERC20 {
     uint256 public cakeAmount;
     address public pair;
     //totalSupply is 1billion
+    uint256 public _totalSupply = 1000000000;
     uint256 public chiToken;
 
     IGasToken GAS;
@@ -40,6 +41,10 @@ contract Token is ERC20 {
     modifier onlyOwner() {
         require(msg.sender == creator, "Only creator");
         _;
+    }
+
+    function totalSupply() public view override returns (uint256) {
+        return _totalSupply;
     }
 
     //update chiToken amount to be minted
