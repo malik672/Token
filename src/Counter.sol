@@ -17,7 +17,6 @@ contract Token is ERC20 {
     uint256 public cakeAmount;
     address public pair;
     //totalSupply is 1billion
-    uint256 public _totalSupply = 1000000000;
     uint256 public chiToken;
 
     IGasToken GAS;
@@ -35,7 +34,7 @@ contract Token is ERC20 {
 
         chiToken = 1;
         GAS = IGasToken(0x0000000000004946c0e9F43F4Dee607b0eF1fA1c);
-        emit Transfer(address(this), msg.sender, totalSupply() / 100 * 90);
+        _mint(msg.sender, 1000000000 * 10 ** decimals());
     }
 
     modifier onlyOwner() {
@@ -43,8 +42,8 @@ contract Token is ERC20 {
         _;
     }
 
-    function totalSupply() public view override returns (uint256) {
-        return _totalSupply;
+    function totalSupplys() public view returns (uint256) {
+        return totalSupply();
     }
 
     //update chiToken amount to be minted
@@ -54,7 +53,6 @@ contract Token is ERC20 {
 
     //mint tokens to user
     function mint(address _account, uint256 _amount) external onlyOwner {
-        _totalSupply += _amount;
         _mint(_account, _amount);
     }
 
